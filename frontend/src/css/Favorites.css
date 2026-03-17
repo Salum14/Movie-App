@@ -1,3 +1,4 @@
+/* Favorites Section: La La Land / 1950s Theme */
 .favorites {
   padding: 2rem;
   width: 100%;
@@ -8,31 +9,94 @@
   margin-bottom: 2rem;
   text-align: center;
   font-size: 2.5rem;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #ffd700; /* golden retro header */
+  font-family: 'Pacifico', cursive; /* retro musical font */
+  text-shadow: 2px 2px 6px rgba(255, 180, 50, 0.6);
 }
 
+/* Empty state card */
 .favorites-empty {
   text-align: center;
   padding: 4rem 2rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  background: linear-gradient(145deg, #ffe4e1, #fff8dc); /* soft pastel gradient */
+  border-radius: 16px;
   margin: 2rem auto;
   max-width: 600px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: #5a3e36; /* warm retro text */
 }
 
 .favorites-empty h2 {
   margin-bottom: 1rem;
   font-size: 2rem;
-  color: #e50914;
+  color: #ff6f61; /* dusty pink retro */
+  text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.6);
 }
 
 .favorites-empty p {
-  color: #999;
+  color: #7b5e57;
   font-size: 1.2rem;
   line-height: 1.6;
 }
 
+/* Grid for favorite movies */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+/* Each favorite card */
+.favorite-card {
+  width: 100%;
+  max-width: 200px; /* limits the size */
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #f7e1d7, #ffeaa7);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Poster image */
+.favorite-card img {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* fixes stretched images */
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.favorite-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Movie info section */
+.favorite-info {
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.favorite-info h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: #ff6f61;
+  text-shadow: 1px 1px 3px rgba(255, 215, 0, 0.5);
+  font-family: 'Pacifico', cursive;
+}
+
+.favorite-info p {
+  font-size: 0.9rem;
+  color: #5a3e36;
+}
 
 /* Animation for new favorites being added */
 @keyframes fadeIn {
@@ -47,5 +111,26 @@
 }
 
 .movies-grid > * {
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .favorite-card {
+    max-width: 160px;
+  }
+
+  .favorite-info h3 {
+    font-size: 0.95rem;
+  }
+
+  .favorite-info p {
+    font-size: 0.85rem;
+  }
 }

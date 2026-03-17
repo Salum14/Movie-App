@@ -1,16 +1,40 @@
 .navbar {
-  background-color: #000000;
+  background: linear-gradient(
+    90deg,
+    #1e1a3a,
+    #3a2c6d,
+    #ff5fa2
+  );
+
   padding: 1rem 2rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+/* BRAND / LOGO */
+
+.navbar-brand a {
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  color: #ffd166;
+
+  letter-spacing: 1px;
+
+  text-shadow: 0 0 8px rgba(255,209,102,0.8);
+
+  transition: transform 0.2s ease;
 }
+
+.navbar-brand a:hover {
+  transform: scale(1.05);
+}
+
+/* LINKS */
 
 .navbar-links {
   display: flex;
@@ -19,22 +43,40 @@
 
 .nav-link {
   font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+
+  padding: 0.5rem 1.2rem;
+
+  border-radius: 20px;
+
+  color: white;
+
+  transition: all 0.25s ease;
 }
+
+/* HOVER EFFECT */
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    135deg,
+    #ff5fa2,
+    #ffd166
+  );
+
+  color: #1e1a3a;
+
+  box-shadow: 0 0 10px rgba(255,209,102,0.7);
 }
 
+/* MOBILE */
+
 @media (max-width: 768px) {
+
   .navbar {
     padding: 1rem;
   }
 
-  .navbar-brand {
-    font-size: 1.2rem;
+  .navbar-brand a {
+    font-size: 1.3rem;
   }
 
   .navbar-links {
@@ -42,6 +84,7 @@
   }
 
   .nav-link {
-    padding: 0.5rem;
+    padding: 0.4rem 0.9rem;
   }
+
 }

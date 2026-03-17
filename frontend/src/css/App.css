@@ -1,8 +1,35 @@
-.main-content {
+/* Main Content Section: La La Land / 1950s Theme */
+main-content {
   flex: 1;
   padding: 2rem;
   box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-direction: column;
+  
+  /* Background: subtle retro gradient */
+  background: linear-gradient(180deg, #3b1a4d 0%, #2b1a2f 50%, #3b1a4d 100%);
+  
+  /* Soft glow / vignette for cinematic feel */
+  box-shadow: inset 0 0 40px rgba(255, 200, 150, 0.1);
+  
+  /* Optional rounded edges for contained content */
+  border-radius: 12px;
+  
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Optional content section inside main-content */
+.main-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  main-content {
+    padding: 1.5rem;
+  }
 }
