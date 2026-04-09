@@ -1,41 +1,79 @@
-import {createContext, useState, useContext, useEffect} from "react"
+import { createContext, useState, useContext, useEffect } from "react";
 
-const MovieContext = createContext()
+const MovieContext = createContext();
+export const useMovieContext = () => useContext(MovieContext);
 
-export const useMovieContext = () => useContext(MovieContext)
+const BACKEND_URL = "http://localhost:5001";
 
-export const MovieProvider = ({children}) => {
-    const [favorites, setFavorites] = useState([])
-    
-    useEffect(() => {
-        const storedFavs = localStorage.getItem("favorites")
-        if (storedFavs) setFavorites(JSON.parse(storedFavs))
-    }, [])
-    
-    useEffect(() => {
-        localStorage.setItem('favorites', JSON.stringify(favorites))
-    }, [favorites])
+export const MovieProvider = ({ children }) => {
+  const [favorites, setFavorites] = useState([]);
 
-    const addToFavorites = (movie) => {
-        setFavorites(prev => [...prev, movie])
+  // 📥 LOAD from MongoDB
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/favorites`);
+        const data = await res.json();
+        setFavorites(data);
+      } catch (err) {
+        console.log("Error loading favorites:", err);
+      }
+    };
+
+    fetchFavorites();
+  }, []);
+
+  // ❤️ ADD favorite (MongoDB)
+  const addToFavorites = async (movie) => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/favorites`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(movie),
+      });
+
+      const data = await res.json();
+
+      setFavorites((prev) => {
+        const exists = prev.some((m) => m.id === data.id);
+        if (exists) return prev;
+        return [...prev, data];
+      });
+    } catch (err) {
+      console.log("Error adding favorite:", err);
     }
+  };
 
-    const removeFromFavorites = (movieID) => {
-        setFavorites(prev => prev.filter(movie => movie.id !== movieID))
+  // ❌ REMOVE favorite (MongoDB)
+  const removeFromFavorites = async (movieID) => {
+    try {
+      await fetch(`${BACKEND_URL}/api/favorites/${movieID}`, {
+        method: "DELETE",
+      });
+
+      setFavorites((prev) =>
+        prev.filter((movie) => movie.id !== movieID)
+      );
+    } catch (err) {
+      console.log("Error removing favorite:", err);
     }
+  };
 
-    const isFavorite = (movieID) => {
-        return favorites.some(movie => movie.id === movieID)
-    }
+  // ✔️ check favorite
+  const isFavorite = (movieID) => {
+    return favorites.some((movie) => movie.id === movieID);
+  };
 
-    const value = {
+  return (
+    <MovieContext.Provider
+      value={{
         favorites,
         addToFavorites,
         removeFromFavorites,
-        isFavorite
-    }
-    
-    return <MovieContext.Provider value={value}>
-        {children}
+        isFavorite,
+      }}
+    >
+      {children}
     </MovieContext.Provider>
-}
+  );
+};

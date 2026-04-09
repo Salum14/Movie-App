@@ -134,3 +134,15 @@
     font-size: 0.85rem;
   }
 }
+.favorite-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.favorite-btn.active {
+  color: red;
+}
