@@ -63,27 +63,33 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  color: #ff4757;
+
+  color: white; /* 🤍 default */
   font-size: 1.6rem;
+
   padding: 0.5rem;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   width: 44px;
   height: 44px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s, transform 0.2s;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+  transition: background-color 0.2s, transform 0.2s, color 0.2s;
 }
 
+/* hover */
 .favorite-btn:hover {
   background-color: rgba(255, 255, 255, 0.6);
   transform: scale(1.1);
+  color: #ff4757; /* red on hover */
 }
 
+/* ❤️ clicked (favorited) */
 .favorite-btn.active {
-  color: #ffd700; /* golden retro star */
+  color: #ff4757; /* red */
 }
 
 .rating-select {
@@ -128,22 +134,3 @@
   text-shadow: 0 0 3px rgba(255, 215, 0, 0.7);
 }
 
-@media (max-width: 768px) {
-  .movie-card {
-    font-size: 0.9rem;
-  }
-
-  .movie-info {
-    padding: 0.75rem;
-  }
-
-  .favorite-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 1.3rem;
-  }
-
-  .rating-select {
-    font-size: 0.85rem;
-  }
-}
