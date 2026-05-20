@@ -1,0 +1,1 @@
+a full-stack movie web application using React, Node.js, Express, and MongoDB that allows users to browse, search, and save favorite movies using the TMDB API. Implemented RESTful API integration, persistent database storage, dynamic UI updates, and state management for real-time favorite tracking across the application
